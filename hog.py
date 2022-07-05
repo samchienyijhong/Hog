@@ -369,7 +369,7 @@ def extra_turn_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     # END PROBLEM 11
 
 
-def final_strategy(score, opponent_score):
+def final_strategy(score, opponent_score, goal=GOAL_SCORE):
     """Write a brief description of your final strategy.
 
     *** YOUR DESCRIPTION HERE ***
@@ -381,8 +381,10 @@ def final_strategy(score, opponent_score):
     """
     # BEGIN PROBLEM 12
     score_after_bacon = score + free_bacon(opponent_score)
-    if score_after_bacon >= GOAL_SCORE:
+    if score_after_bacon >= goal:
         return 0
+    if goal - score < 10:
+        return 3
     diff = abs(score - opponent_score)
     for i in range(90, 0, -10):
         if diff > i:
