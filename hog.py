@@ -5,7 +5,6 @@ from ucb import main, trace, interact
 
 GOAL_SCORE = 100  # The goal of Hog is to score 100 points.
 FIRST_101_DIGITS_OF_PI = 31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
-MARGIN_CUTOFF_NUM = [(5, 4, 2), (10, 9, 3), (15, 12, 4), (20, 13, 6)]
 
 ######################
 # Phase 1: Simulator #
@@ -384,16 +383,16 @@ def final_strategy(score, opponent_score, goal=GOAL_SCORE):
     score_after_bacon = score + free_bacon(opponent_score)
     if score_after_bacon >= goal:
         return 0
+    diff = abs(score - opponent_score)
     if score < opponent_score:  # Lose more than 70 points
-        diff = abs(score - opponent_score)
         for i in range(90, 60, -10):
             if diff > i:
                 return extra_turn_strategy(score, opponent_score, 13, 8)
     margin = goal - score
-    if margin < 25:  # Win by less than 20 points
-        for i in MARGIN_CUTOFF_NUM:
-            if margin < i[0]:
-                return extra_turn_strategy(score, opponent_score, i[1], i[2])
+    if margin < 10:  # Win by less than 10 points
+        for i in range(5, 15, 5):  # margin_cutoff_num = [(5, 4, 2), (10, 9, 3)]
+            if margin < i:
+                return extra_turn_strategy(score, opponent_score, i - 1, round((i - 1) ** 0.5))
     return extra_turn_strategy(score, opponent_score, 12, 5)
     # END PROBLEM 12
 
