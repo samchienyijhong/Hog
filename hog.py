@@ -384,15 +384,17 @@ def final_strategy(score, opponent_score, goal=GOAL_SCORE):
     if score_after_bacon >= goal:
         return 0
     diff = abs(score - opponent_score)
-    if score < opponent_score:  # Lose more than 70 points
-        for i in range(90, 60, -10):
+    if opponent_score - score > 40:  # Lose more than 40 points
+        for i in range(95, 35, -5):
             if diff > i:
-                return extra_turn_strategy(score, opponent_score, 13, 8)
+                return extra_turn_strategy(score, opponent_score, 13, round(i ** 0.5))
     margin = goal - score
-    if margin < 10:  # Win by less than 10 points
-        for i in range(5, 15, 5):
+    if margin < 10:  # Win by less than 15 points
+        for i in range(5, 20, 5):
             if margin < i:
-                return extra_turn_strategy(score, opponent_score, i - 1, round((i - 1) ** 0.5))
+                cutoff = 12 if i == 15 else i - 1
+                num = round((i - 1) ** 0.5)
+                return extra_turn_strategy(score, opponent_score, cutoff, num)
     return extra_turn_strategy(score, opponent_score, 12, 5)
     # END PROBLEM 12
 
