@@ -390,7 +390,7 @@ def final_strategy(score, opponent_score, goal=GOAL_SCORE):
                 return extra_turn_strategy(score, opponent_score, 13, 8)
     margin = goal - score
     if margin < 10:  # Win by less than 10 points
-        for i in range(5, 15, 5):  # margin_cutoff_num = [(5, 4, 2), (10, 9, 3)]
+        for i in range(5, 15, 5):
             if margin < i:
                 return extra_turn_strategy(score, opponent_score, i - 1, round((i - 1) ** 0.5))
     return extra_turn_strategy(score, opponent_score, 12, 5)
