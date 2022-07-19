@@ -6,6 +6,7 @@ from ucb import main, trace, interact
 GOAL_SCORE = 100  # The goal of Hog is to score 100 points.
 FIRST_101_DIGITS_OF_PI = 31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
 
+
 ######################
 # Phase 1: Simulator #
 ######################
@@ -132,7 +133,6 @@ def pig_pass(player_score, opponent_score):
 
 def other(who):
     """Return the other player, for a player WHO numbered 0 or 1.
-
     >>> other(0)
     1
     >>> other(1)
@@ -333,19 +333,14 @@ def run_experiments():
     if True:  # Change to False when done finding max_scoring_num_rolls
         six_sided_max = max_scoring_num_rolls(six_sided)
         print('Max scoring num rolls for six-sided dice:', six_sided_max)
-
     if False:  # Change to True to test always_roll(8)
         print('always_roll(8) win rate:', average_win_rate(always_roll(8)))
-
     if False:  # Change to True to test bacon_strategy
         print('bacon_strategy win rate:', average_win_rate(bacon_strategy))
-
     if False:  # Change to True to test extra_turn_strategy
         print('extra_turn_strategy win rate:', average_win_rate(extra_turn_strategy))
-
     if True:  # Change to True to test final_strategy
         print('final_strategy win rate:', average_win_rate(final_strategy))
-
     "*** You may add additional experiments as you wish ***"
 
 
@@ -365,7 +360,8 @@ def extra_turn_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     """
     # BEGIN PROBLEM 11
     score_after_bacon = score + free_bacon(opponent_score)
-    return 0 if extra_turn(score_after_bacon, opponent_score) or not bacon_strategy(score, opponent_score, cutoff, num_rolls) else num_rolls
+    return 0 if extra_turn(score_after_bacon, opponent_score) or not bacon_strategy(score, opponent_score, cutoff,
+                                                                                    num_rolls) else num_rolls
     # END PROBLEM 11
 
 
